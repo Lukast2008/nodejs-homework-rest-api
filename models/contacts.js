@@ -1,6 +1,7 @@
 const fsp = require("fs/promises");
 const { nanoid } = require("nanoid");
 const path = require("path");
+const { createHttpException } = require("../helpers");
 
 const contactsPath = path.join(__dirname, "contacts.JSON");
 
@@ -17,7 +18,7 @@ const getContactById = async (contactId) => {
   const contacts = await listContacts();
   const contact = contacts.find((contact) => contact.id === contactId);
   if (!contact) {
-    throw new Error("the contact is not found");
+    throw createHttpException(404, "the contact is not found")
   }
   return contact;
 };
@@ -26,7 +27,7 @@ const removeContact = async (contactId) => {
   const contacts = await listContacts();
   const index = contacts.findIndex((contact) => contact.id === contactId);
   if (index === -1) {
-    throw new Error("the contact is not found");
+    throw createHttpException(404, "the contact is not found")
   }
   contacts.splice(index, 1);
   await updateContacts(contacts);
@@ -52,12 +53,13 @@ const addContact = async ({ name, email, phone }) => {
 const updateContact = async (contactId, body) => {
   const contacts = await listContacts();
 
-  const index = contacts.findIndex((contact) => contacts.id === contactId);
+  const index = contacts.findIndex((contact) => contact.id === contactId);
   if (index === -1) {
-    throw new Error("The book is not found");
+    // throw new Error("The book is not found");
+    throw createHttpException(404, "the contact is not found")
   }
 
-  contacts[index] = { contactId, ...body };
+  contacts[index] = { id: contactId, ...body };
   await updateContacts(contacts);
   return contacts[index];
 };
