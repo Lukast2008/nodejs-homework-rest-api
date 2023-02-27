@@ -5,5 +5,5 @@ const {authUser} = require('./auth-user.middlewre')
 module.exports = {
   globalErrorHandler,
   validateBody,
-  authUser
-}
+  authUser,
+};

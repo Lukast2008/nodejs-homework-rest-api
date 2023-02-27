@@ -29,6 +29,7 @@ const usersSchema = mongoose.Schema(
       default: null,
       trim: true,
     },
+    avatarURL: String
   },
   {
     versionKey: false,
