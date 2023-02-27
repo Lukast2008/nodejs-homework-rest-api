@@ -39,7 +39,12 @@ router
     "/sign-in",
     validateBody(userSignInSchema),
     controllerExceptionWrapper(authController.signIn)
+    
   )
-  .post("/logout", authUser, controllerExceptionWrapper(authController.logout));
+  .post(
+    "/logout",
+    authUser,
+    controllerExceptionWrapper(authController.logout)
+  );
 
 module.exports = router;

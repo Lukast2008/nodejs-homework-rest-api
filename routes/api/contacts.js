@@ -8,7 +8,6 @@ const router = express.Router();
 
 router
   .get("/", authUser, controllerExceptionWrapper(contactsController.getAll))
-
   .get(
     "/:contactId",
     authUser,
