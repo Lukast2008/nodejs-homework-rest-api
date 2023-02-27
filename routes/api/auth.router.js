@@ -39,12 +39,12 @@ router
     "/sign-in",
     validateBody(userSignInSchema),
     controllerExceptionWrapper(authController.signIn)
-    
   )
-  .post(
-    "/logout",
-    authUser,
-    controllerExceptionWrapper(authController.logout)
+  .post("/logout", authUser, controllerExceptionWrapper(authController.logout))
+  
+  .get(
+    "/email/verify/:verificationToken",
+    controllerExceptionWrapper(authController.verifiEmail)
   );
 
 module.exports = router;

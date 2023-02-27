@@ -29,7 +29,15 @@ const usersSchema = mongoose.Schema(
       default: null,
       trim: true,
     },
-    avatarURL: String
+    avatarURL: String,
+    isEmailVeryfied: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      required: [true, 'Verify token is required'],
+    },
   },
   {
     versionKey: false,
